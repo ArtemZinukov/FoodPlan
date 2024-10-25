@@ -31,7 +31,7 @@ def card2(request):
 
 
 def card3(request):
-    recipe = Recipes.objects.calculate_calories().get(id=3)
+    recipe = Recipes.objects.calculate_calories().get(id=1)
     recipe_ingredients = list(RecipeIngredient.objects.filter(recipe=recipe))
     return render(request, 'card3.html', context={'recipe_ingredients': recipe_ingredients,
                   'recipe': recipe}

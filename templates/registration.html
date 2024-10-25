@@ -16,7 +16,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light fixed-top navbar__opacity">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{% url 'index' %}">
                     <img src="{% static 'img/logo.8d8f24edbb5f.svg' %}" height="55" width="189" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse1"
@@ -27,8 +27,10 @@
                     <ul class="navbar-nav w-100">
                         
                         <li class="nav-item align-items-center d-md-flex flex-grow-1 justify-content-end">
-                            <button class="btn shadow-none btn-outline-success me-2 foodplan_green foodplan__border_green">Подписка</button>
-                            <button class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</button>
+                            <a href="{% url 'order' %}"
+                                  class="btn btn-outline-success me-2 shadow-none foodplan_green foodplan__border_green">Подписка</a>
+                            <a href="{% url 'auth' %}"
+                                 class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</a>
                         </li>
                     </ul>
                 </div>
@@ -72,7 +74,7 @@
                                 <button type="submit" class="btn  shadow-nonew-100 btn-outline-success foodplan_green foodplan__border_green">Регистрация</button>
                             </div>
                             <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
-                                <small>Уже есть аккаунт? <a href="#" class="link-dark foodplan_green">Войти</a></small>
+                                <small>Уже есть аккаунт? <a href="{% url 'auth' %}" class="link-dark foodplan_green">Войти</a></small>
                             </div>
                         </div>
                     </form>
