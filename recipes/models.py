@@ -1,10 +1,18 @@
 from django.db import models
+from django.db.models import Sum, F
+
+
+class RecipeQuerySet(models.QuerySet):
+    def calculate_calories(self):
+        return self.annotate(calories=(Sum(F('recipeingredient__ingredient__calories') * F('recipeingredient__amount')) / 100))
+
 
 class Recipes(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название рецепта')
     description = models.TextField(blank=True, verbose_name="Описание рецепта")
     ingredients = models.ManyToManyField('Ingredient', verbose_name="Ингредиенты")
-    image = models.ImageField(upload_to='recipes/img', verbose_name="Картинка с рецептом")
+
+    objects = RecipeQuerySet.as_manager()
 
     class Meta:
         verbose_name = "Рецепт"
@@ -24,6 +32,20 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class RecipeIngredient(models.Model):
+    recipe = models.ForeignKey(Recipes, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    amount = models.FloatField(default=0, blank=True, null=True)
+
+
+    class Meta:
+        verbose_name = "Ингредиент"
+        verbose_name_plural = "Ингредиенты"
+
+    def __str__(self):
+        return f"{self.recipe.title} - {self.ingredient.title}"
 
 
 class User(models.Model):

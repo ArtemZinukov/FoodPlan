@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from recipes.models import Recipes, Ingredient, RecipeIngredient
 
 
 def index(request):
@@ -30,6 +31,10 @@ def card2(request):
 
 
 def card3(request):
-    return render(request, 'card3.html')
+    recipe = Recipes.objects.calculate_calories().get(id=3)
+    recipe_ingredients = list(RecipeIngredient.objects.filter(recipe=recipe))
+    return render(request, 'card3.html', context={'recipe_ingredients': recipe_ingredients,
+                  'recipe': recipe}
+                  )
 
 

@@ -18,7 +18,7 @@
                 <a class="navbar-brand" href="#">
                     <img src="{% static 'img/logo.8d8f24edbb5f.svg' %}" height="55" width="189" alt="">
                 </a>
-                <button class="btn btn-outline-success me-2 shadow-none foodplan_green foodplan__border_green">Назад</button>
+                <a href="{% url 'index' %}" class="btn btn-outline-success me-2 shadow-none foodplan_green foodplan__border_green">Назад</a>
             </div>
         </nav>
     </header>
@@ -33,26 +33,19 @@
                     </div>
                     <div class="col-12 col-md-8 d-flex flex-column justify-content-between">
                         <div class="row">
-                            <h2>Название рецепта</h2>
+                            <h2>{{ recipe.title }}</h2>
                             <div class="col-12 col-sm-6">
-                                <h6>Рецепт рецепт Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi eius nemo voluptatum minus
-                                    facilis blanditiis ut architecto rem maiores, aperiam aut debitis repellat quod voluptates natus, laboriosam hic
-                                    adipisci non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi eius nemo voluptatum minus
-                                    facilis blanditiis ut architecto rem maiores, aperiam aut debitis repellat quod voluptates natus, laboriosam hic
-                                    adipisci non. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi eius nemo voluptatum minus
-                                    facilis blanditiis ut architecto rem maiores, aperiam aut debitis repellat quod voluptates natus, laboriosam hic
-                                    adipisci non.</h6>
+                                <h6>{{ recipe.description }}</h6>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <small class="link-secondary">Ингредиенты:</small>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item disabled"><small>ингредиент (500г.)</small></li>
-                                    <li class="list-group-item disabled"><small>ингредиент (500г.)</small></li>
-                                    <li class="list-group-item disabled"><small>ингредиент (500г.)</small></li>
-                                    <li class="list-group-item disabled"><small>ингредиент (500г.)</small></li>
-                                    <li class="list-group-item disabled"><small>ингредиент (500г.)</small></li>
+                                    {% for ingredient in recipe_ingredients %}
+                                    <li class="list-group-item disabled"><small>{{ ingredient.ingredient.title }}
+                                        ({{ ingredient.amount }} г.)</small></li>
+                                    {% endfor %}
                                 </ul>
-                                <small class="link-secondary">Общая калорийность: 1000 ккал</small>
+                                <small class="link-secondary">Общая калорийность: {{ recipe.calories }} ккал</small>
                             </div>
                         </div>
                     </div>

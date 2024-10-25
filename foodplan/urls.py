@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from recipes import views
+from recipes.models import Recipes, Ingredient, RecipeIngredient
 
 
 urlpatterns = [

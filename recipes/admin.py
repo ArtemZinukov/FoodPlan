@@ -1,12 +1,21 @@
 from django.contrib import admin
-from .models import Recipes, Ingredient, User, Tariff
+from .models import Recipes, Ingredient, User, Tariff, RecipeIngredient
+
+
+class RecipeIngredientInline(admin.TabularInline):
+    model = RecipeIngredient
+    extra = 1
 
 
 @admin.register(Recipes)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'get_ingredients', 'image')
+    list_display = ('title', 'description', 'get_ingredients')
     search_fields = ('title',)
     list_filter = ('ingredients',)
+    fields = ('title', 'description')
+    inlines = [
+        RecipeIngredientInline
+    ]
 
     def get_ingredients(self, obj):
         return ", ".join([ingredient.title for ingredient in obj.ingredients.all()])
