@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'recipes',
     'tinymce',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
