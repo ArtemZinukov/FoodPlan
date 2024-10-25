@@ -27,9 +27,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-4 d-flex justify-content-center">
+
                         <div class="card foodplan__card_borderless">
-                            <img src="{% static 'img/circle1.png' %}" alt="">
+                            <img src="{{ recipe.image.url }}" alt="Картинка с рецептом">
                         </div>
+
                     </div>
                     <div class="col-12 col-md-8 d-flex flex-column justify-content-between">
                         <div class="row">

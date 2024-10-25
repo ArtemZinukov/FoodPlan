@@ -11,6 +11,7 @@ class Recipes(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название рецепта')
     description = models.TextField(blank=True, verbose_name="Описание рецепта")
     ingredients = models.ManyToManyField('Ingredient', verbose_name="Ингредиенты")
+    image = models.ImageField(upload_to='recipes/img', verbose_name="Картинка с рецептом")
 
     objects = RecipeQuerySet.as_manager()
 
