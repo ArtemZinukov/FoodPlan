@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 
 from recipes import views
@@ -17,6 +17,7 @@ urlpatterns = [
     path('card1/', views.card1, name='card1'),
     path('card2/', views.card2, name='card2'),
     path('card3/', views.card3, name='card3'),
+    path('tinymce/', include('tinymce.urls')),
 
 ]
 if settings.DEBUG:
