@@ -7,13 +7,8 @@ Configuration.configure(settings.YOOKASSA_SHOP_ID,
                         settings.YOOKASSA_SECRET_KEY)
 
 
-
 def index(request):
     return render(request, 'index.html')
-
-
-def auth(request):
-    return render(request, 'auth.html')
 
 
 def lk(request):
