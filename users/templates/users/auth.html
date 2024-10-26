@@ -60,19 +60,40 @@
                 <div class="card px-5 py-3 d-flex align-items-center foodplan__shadow">
                     <form method="post">
                         {% csrf_token %}
+                        <div class="form-error">{{ form.non_field_errors }}</div>
+
                         <h1 class="mb-4 text-center"><strong>Вход</strong></h1>
-                        {{ form.as_p }}
-{#                        <div class="mb-3">#}
-{#                            <label for="exampleInputEmail1" class="form-label">Email</label>#}
-{#                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">#}
-{#                        </div>#}
-{#                        <div class="mb-3">#}
-{#                            <div class="d-flex align-items-center justify-content-between">#}
-{#                                <label for="exampleInputPassword1" class="form-label">Пароль</label>#}
-{#                                <small><a href="#" class="link-dark foodplan_green">Забыли пароль?</a></small>#}
-{#                            </div>#}
-{#                            <input type="password" class="form-control" id="password">#}
-{#                        </div>#}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Логин</label>
+                            <input
+                                type="text"
+                                name="username"
+                                class="form-control form-input {% if form.username.errors %}is-invalid{% endif %}"
+                                id="username"
+                                value="{{ form.username.value|default_if_none:'' }}"
+                                required>
+                            {% if form.username.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Пароль</label>
+                            <small><a href="#" class="link-dark foodplan_green">Забыли пароль?</a></small>
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control form-input {% if form.password.errors %}is-invalid{% endif %}"
+                                id="password"
+                                required>
+                            {% if form.password.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.password.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 mt-3">
                                 <button type="submit"
