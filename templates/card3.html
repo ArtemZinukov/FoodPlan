@@ -44,7 +44,7 @@
                                 <ul class="list-group list-group-flush">
                                     {% for ingredient in recipe_ingredients %}
                                     <li class="list-group-item disabled"><small>{{ ingredient.ingredient.title }}
-                                        ({{ ingredient.amount }} г.)</small></li>
+                                        ({{ ingredient.amount }} г)</small></li>
                                     {% endfor %}
                                 </ul>
                                 <small class="link-secondary">Общая калорийность: {{ recipe.calories }} ккал</small>

@@ -39,7 +39,7 @@ class Ingredient(models.Model):
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipes, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    amount = models.FloatField(default=0, blank=True, null=True)
+    amount = models.IntegerField(default=0, blank=True, null=True)
 
 
     class Meta:
