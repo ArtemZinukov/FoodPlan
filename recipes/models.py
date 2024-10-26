@@ -46,7 +46,6 @@ class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     amount = models.IntegerField(default=0, blank=True, null=True)
 
-
     class Meta:
         verbose_name = "Ингредиент"
         verbose_name_plural = "Ингредиенты"
@@ -68,27 +67,7 @@ class User(models.Model):
 
 
 class Tariff(models.Model):
-    # TIME_LIMIT_CHOICES = (
-    #     ('1_month', '1 месяц'),
-    #     ('2_months', '2 месяца'),
-    #     ('6_months', 'Полгода'),
-    #     ('1_year', '1 год'),
-    # )
-    # ALLERGY_CHOICES = (
-    #     ('none', 'Нет аллергий'),
-    #     ('seafood', 'Рыба и морепродукты'),
-    #     ('meat', 'Мясо'),
-    #     ('grains', 'Зерновые'),
-    #     ('honey', 'Продукты пчеловодства'),
-    #     ('nuts', 'Орехи и бобовые'),
-    #     ('dairy', 'Молочные продукты'),
-    # )
     time_limit = models.CharField(max_length=20, verbose_name='Временной лимит')
-    # breakfast = models.BooleanField(default=False, verbose_name="Есть завтрак?")
-    # dinner = models.BooleanField(default=False, verbose_name="Есть обед?")
-    # supper = models.BooleanField(default=False, verbose_name="Есть ужин?")
-    # dessert = models.BooleanField(default=False, verbose_name="Есть десерт?")
-    # allergies = models.TextField(max_length=20, choices=ALLERGY_CHOICES, default='none', verbose_name="Аллергии")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
 
     class Meta:
