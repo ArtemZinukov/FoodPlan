@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', views.auth, name='auth'),
     path('lk/', views.lk, name='lk'),
-    path('order/', views.order, name='order'),
+    path('order/', views.create_order, name='order'),
     path('registration/', views.registration, name='registration'),
     path('card1/', views.card1, name='card1'),
     path('card2/', views.card2, name='card2'),

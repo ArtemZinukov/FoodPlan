@@ -49,10 +49,10 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Tariff)
 class TariffAdmin(admin.ModelAdmin):
-    list_display = ('time_limit', 'price', 'get_allergies')
+    list_display = ('time_limit', 'price')
     search_fields = ('time_limit',)
-    list_filter = ('allergies',)
-
-    def get_allergies(self, obj):
-        return obj.allergies
-    get_allergies.short_description = 'Аллергии'
+    # list_filter = ('allergies',)
+    #
+    # def get_allergies(self, obj):
+    #     return obj.allergies
+    # get_allergies.short_description = 'Аллергии'

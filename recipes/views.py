@@ -1,5 +1,11 @@
-from django.shortcuts import render
-from recipes.models import Recipes, Ingredient, RecipeIngredient
+from django.conf import settings
+from django.shortcuts import render, redirect
+from recipes.models import Recipes, Ingredient, RecipeIngredient, Tariff
+from yookassa import Configuration, Payment
+
+Configuration.configure(settings.YOOKASSA_SHOP_ID,
+                        settings.YOOKASSA_SECRET_KEY)
+
 
 
 def index(request):
@@ -18,8 +24,33 @@ def registration(request):
     return render(request, 'registration.html')
 
 
-def order(request):
-    return render(request, 'order.html')
+def create_order(request):
+    tariffs = Tariff.objects.all()
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            tariff_id = request.POST.get('tariff_id')
+
+            tariff = Tariff.objects.get(id=tariff_id)
+
+            payment = Payment.create({
+                "amount": {
+                    "value": str(tariff.price),
+                    "currency": "RUB"
+                },
+                "confirmation": {
+                    "type": "redirect",
+                    "return_url": request.build_absolute_uri('/')
+                },
+                "capture": True,
+                "description": f"Заказ на тариф {tariff.time_limit}"
+            })
+
+            return redirect(payment.confirmation.confirmation_url)
+        else:
+            return redirect('registration')
+
+    return render(request, 'order.html', {'tariffs': tariffs})
 
 
 def card1(request):

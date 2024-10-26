@@ -2,3 +2,4 @@ Django==4.2.8
 pillow==11.0.0
 environs==9.3.2
 django-tinymce==4.1.0
+yookassa==3.3.0
