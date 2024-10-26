@@ -12,7 +12,7 @@ def index(request):
 
 
 def lk(request):
-    return render(request, 'lk.html')
+    return render(request, 'users/lk.html')
 
 
 def registration(request):
