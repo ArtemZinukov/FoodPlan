@@ -43,7 +43,7 @@ def create_order(request):
 
             return redirect(payment.confirmation.confirmation_url)
         else:
-            return redirect('registration')
+            return redirect('users:auth')
 
     return render(request, 'order.html', {'tariffs': tariffs})
 
