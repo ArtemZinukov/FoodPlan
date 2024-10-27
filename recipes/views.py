@@ -15,10 +15,6 @@ def lk(request):
     return render(request, 'users/lk.html')
 
 
-def registration(request):
-    return render(request, 'registration.html')
-
-
 def create_order(request):
     tariffs = Tariff.objects.all()
 

@@ -12,11 +12,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('lk/', views.lk, name='lk'),
     path('order/', views.create_order, name='order'),
-    path('registration/', views.registration, name='registration'),
     path('card1/', views.card1, name='card1'),
     path('card2/', views.card2, name='card2'),
     path('card3/', views.card3, name='card3'),
-    path('tinymce/', include('tinymce.urls')),
     path('users/', include('users.urls', namespace='users')),
 ]
 if settings.DEBUG:
