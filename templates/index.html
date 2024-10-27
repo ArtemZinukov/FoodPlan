@@ -17,8 +17,17 @@
                 <a class="navbar-brand" href="{% url 'index' %}">
                     <img src="{% static 'img/logo.8d8f24edbb5f.svg' %}" height="55" width="189" alt="">
                 </a>
-                <a href="{% url 'auth' %}"
-                   class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</a>
+                {% if user.is_authenticated %}
+                    <div class="d-flex align-items-center">
+                        <span class="navbar-text me-3">
+                            Привет, {{ user.username }}!
+                        </span>
+                        <a href="{% url 'users:logout' %}" class="btn shadow-none btn-outline-danger foodplan_green foodplan__border_green">Выйти</a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'users:auth' %}"
+                       class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</a>
+                {% endif %}
             </div>
         </nav>
     </header>

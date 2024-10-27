@@ -27,8 +27,17 @@
                         <li class="nav-item align-items-center d-md-flex flex-grow-1 justify-content-end">
                             <a href="{% url 'order' %}"
                                   class="btn btn-outline-success me-2 shadow-none foodplan_green foodplan__border_green">Подписка</a>
-                            <a href="{% url 'auth' %}"
-                                 class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</a>
+                        {% if user.is_authenticated %}
+                            <div class="d-flex align-items-center">
+                                <span class="navbar-text me-3">
+                                    Привет, {{ user.username }}!
+                                </span>
+                            <a href="{% url 'users:logout' %}" class="btn shadow-none btn-outline-danger foodplan_green foodplan__border_green">Выйти</a>
+                            </div>
+                        {% else %}
+                            <a href="{% url 'users:auth' %}"
+                                class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Войти</a>
+                        {% endif %}
                         </li>
                     </ul>
                 </div>
@@ -49,18 +58,41 @@
                     <h2 class="text-center"><strong>Авторизация</strong></h2>
                 </div>
                 <div class="card px-5 py-3 d-flex align-items-center foodplan__shadow">
-                    <form>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-error">{{ form.non_field_errors }}</div>
+
                         <h1 class="mb-4 text-center"><strong>Вход</strong></h1>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                            <label for="username" class="form-label">Логин</label>
+                            <input
+                                type="text"
+                                name="username"
+                                class="form-control form-input {% if form.username.errors %}is-invalid{% endif %}"
+                                id="username"
+                                value="{{ form.username.value|default_if_none:'' }}"
+                                required>
+                            {% if form.username.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                                <small><a href="#" class="link-dark foodplan_green">Забыли пароль?</a></small>
-                            </div>
-                            <input type="password" class="form-control" id="password">
+                            <label for="password" class="form-label">Пароль</label>
+                            <small><a href="#" class="link-dark foodplan_green">Забыли пароль?</a></small>
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control form-input {% if form.password.errors %}is-invalid{% endif %}"
+                                id="password"
+                                required>
+                            {% if form.password.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.password.errors }}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 mt-3">

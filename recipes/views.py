@@ -7,17 +7,12 @@ Configuration.configure(settings.YOOKASSA_SHOP_ID,
                         settings.YOOKASSA_SECRET_KEY)
 
 
-
 def index(request):
     return render(request, 'index.html')
 
 
-def auth(request):
-    return render(request, 'auth.html')
-
-
 def lk(request):
-    return render(request, 'lk.html')
+    return render(request, 'users/lk.html')
 
 
 def registration(request):
@@ -48,7 +43,7 @@ def create_order(request):
 
             return redirect(payment.confirmation.confirmation_url)
         else:
-            return redirect('registration')
+            return redirect('users:auth')
 
     return render(request, 'order.html', {'tariffs': tariffs})
 

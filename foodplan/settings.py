@@ -20,8 +20,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
     'recipes',
     'tinymce',
+
 ]
 
 MIDDLEWARE = [
@@ -100,3 +102,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 YOOKASSA_SHOP_ID = env('YOOKASSA_SHOP_ID')
 YOOKASSA_SECRET_KEY = env('YOOKASSA_SECRET_KEY')
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'users:auth'
