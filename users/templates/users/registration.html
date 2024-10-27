@@ -51,24 +51,53 @@
                     <h2 class="text-center"><strong>Авторизация</strong></h2>
                 </div>
                 <div class="card px-5 py-3 d-flex align-items-center foodplan__shadow">
-                    <form>
+                    <form method="post">
+                        {% csrf_token %}
                         <h1 class="mb-4 text-center"><strong>Регистрация</strong></h1>
+                        <input type="hidden" name="next" value="{{ next }}" />
+
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Имя</label>
-                            <input type="text" class="form-control" id="name">
+                            <label for="id_username" class="form-label">Имя</label>
+                            <input type="text" name="username" class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+                                   id="id_username" value="{{ form.username.value|default_if_none:'' }}" required>
+                            {% if form.username.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                            <label for="id_email" class="form-label">E-mail</label>
+                            <input type="email" name="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                                   id="id_email" value="{{ form.email.value|default_if_none:'' }}" required>
+                            {% if form.email.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                            <input type="password" class="form-control" id="password">
+                            <label for="id_password" class="form-label">Пароль</label>
+                            <input type="password" name="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}"
+                                   id="id_password" required>
+                            {% if form.password.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.password.errors }}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Подтверждение пароля</label>
-                            <input type="password" class="form-control" id="PasswordConfirm">
-                        </div>
+                            <label for="id_verif_password" class="form-label">Подтверждение пароля</label>
+                            <input type="password" name="verif_password" class="form-control {% if form.verif_password.errors %}is-invalid{% endif %}"
+                                   id="id_verif_password" required>
+                            {% if form.verif_password.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.verif_password.errors }}
+                                </div>
+                            {% endif %}
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 mt-3">
                                 <button type="submit" class="btn  shadow-nonew-100 btn-outline-success foodplan_green foodplan__border_green">Регистрация</button>
