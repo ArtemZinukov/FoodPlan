@@ -10,9 +10,6 @@ class LoginUser(LoginView):
     template_name = 'users/auth.html'
     extra_context = {'title': "Авторизация"}
 
-    # def get_success_url(self):
-    #     return reverse_lazy('index')
-
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm

@@ -106,3 +106,8 @@ YOOKASSA_SECRET_KEY = env('YOOKASSA_SECRET_KEY')
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'users:auth'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'users.authentication.EmailAuthBackend',
+]
